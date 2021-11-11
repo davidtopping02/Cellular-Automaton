@@ -1,3 +1,1 @@
 # cellularAutomatonNEW
-
-testing github
