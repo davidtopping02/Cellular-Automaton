@@ -12,6 +12,10 @@
 #ifndef CELLULAR_AUTOMATON_H
 #define CELLULAR_AUTOMATON_H
 
+#include <vector>
+#include <iostream>
+using namespace std;
+
 /**
  * CLASSES REQUIRED FOR THE CELLULAR AUTOMATON PROGRAM
  * 
@@ -24,7 +28,7 @@
 class Rule
 {
 private:
-    int pattern[3];
+    vector<int> pattern;
     bool on;
 
 public:
@@ -36,24 +40,11 @@ public:
     {
         //initialising the private members
         this->on = false;
-
-        for (int i = 0; i < 3; i++)
-        {
-            this->pattern[i] = 0;
-        }
     }
 
-    /**
-     * @brief Set the Pattern object
-     * 
-     * @param patternArray 
-     */
-    void setPattern(int patternArray[3])
+    void setPattern(vector<int> newPattern)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            pattern[i] = patternArray[i];
-        }
+        pattern = newPattern;
     }
 
     /**
@@ -83,19 +74,42 @@ private:
     Rule pos16;
     Rule pos32;
     Rule pos64;
-    Rule pos128;
 
 public:
     RulesSet()
     {
         //initialising all patterns
-        int patternArray[3] = {0, 0, 0};
-        pos1.setPattern(patternArray);
+        vector<int> tempVector = {0, 0, 0};
+        pos1.setPattern(tempVector);
         pos1.setOn(false);
 
-        int patternArray[3] = {0, 0, 1};
-        pos2.setPattern(patternArray);
+        tempVector = {0, 0, 1};
+        pos2.setPattern(tempVector);
         pos2.setOn(false);
+
+        tempVector = {0, 1, 0};
+        pos2.setPattern(tempVector);
+        pos2.setOn(false);
+
+        tempVector = {0, 1, 1};
+        pos4.setPattern(tempVector);
+        pos4.setOn(false);
+
+        tempVector = {1, 0, 0};
+        pos8.setPattern(tempVector);
+        pos8.setOn(false);
+
+        tempVector = {1, 0, 1};
+        pos16.setPattern(tempVector);
+        pos16.setOn(false);
+
+        tempVector = {1, 1, 0};
+        pos32.setPattern(tempVector);
+        pos32.setOn(false);
+
+        tempVector = {1, 1, 1};
+        pos64.setPattern(tempVector);
+        pos64.setOn(false);
     }
 };
 
