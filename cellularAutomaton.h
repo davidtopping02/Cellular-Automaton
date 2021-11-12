@@ -18,6 +18,7 @@
 #include <iostream>
 #include <bitset>
 #include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -92,6 +93,8 @@ public:
     //an array of rules for each binary position
     Rule ruleArray[8];
 
+    int setRulesFromBinary(string binaryNumber);
+
     RulesSet()
     {
         //initialising all patterns
@@ -152,11 +155,10 @@ string toBinary(int n);
 /**
  * @brief Set the Rules From Binary Number
  * 
- * @param rules 
  * @param binaryNumber 
  * @return int 
  */
-int setRulesFromBinary(RulesSet rules, string binaryNumber);
+int setRulesFromBinary(string binaryNumber);
 
 /**
  * @brief determines the next line based on the rules and the previous line
