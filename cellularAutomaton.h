@@ -12,9 +12,24 @@
 #ifndef CELLULAR_AUTOMATON_H
 #define CELLULAR_AUTOMATON_H
 
+/** 
+ * ### INCLUDES ###
+ */
 #include <vector>
 #include <iostream>
+#include <bitset>
+#include <string>
 using namespace std;
+
+/**
+ * ### ERROR codes / SUCCESS codes ###
+ */
+#define SUCCESS 100
+#define INVALID_INPUT_PARAMETER 101
+#define PARTIAL_SUCCESS 102
+#define MEMORY_ALLOCATION_ERROR 103
+#define NOT_IMPLEMENTED 104
+#define FILE_IO_ERROR 105
 
 /**
  * CLASSES REQUIRED FOR THE CELLULAR AUTOMATON PROGRAM
@@ -54,7 +69,28 @@ public:
      */
     void setOn(bool onOrOff)
     {
-        on = onOrOff;
+        this->on = onOrOff;
+    }
+
+    /**
+     * @brief Get the On object
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool getOn()
+    {
+        return on;
+    }
+
+    /**
+     * @brief Get the Pattern object
+     * 
+     * @return vector<int> 
+     */
+    vector<int> getPattern()
+    {
+        return pattern;
     }
 };
 
@@ -65,52 +101,66 @@ public:
 class RulesSet
 {
 
-private:
-    //each rule position
-    Rule pos1;
-    Rule pos2;
-    Rule pos4;
-    Rule pos8;
-    Rule pos16;
-    Rule pos32;
-    Rule pos64;
-
 public:
+    //an array of rules for each binary position
+    Rule ruleArray[8];
+
     RulesSet()
     {
         //initialising all patterns
         vector<int> tempVector = {0, 0, 0};
-        pos1.setPattern(tempVector);
-        pos1.setOn(false);
+        ruleArray[0].setPattern(tempVector);
+        ruleArray[0].setOn(false);
 
         tempVector = {0, 0, 1};
-        pos2.setPattern(tempVector);
-        pos2.setOn(false);
+        ruleArray[1].setPattern(tempVector);
+        ruleArray[1].setOn(false);
 
         tempVector = {0, 1, 0};
-        pos2.setPattern(tempVector);
-        pos2.setOn(false);
+        ruleArray[2].setPattern(tempVector);
+        ruleArray[2].setOn(false);
 
         tempVector = {0, 1, 1};
-        pos4.setPattern(tempVector);
-        pos4.setOn(false);
+        ruleArray[3].setPattern(tempVector);
+        ruleArray[3].setOn(false);
 
         tempVector = {1, 0, 0};
-        pos8.setPattern(tempVector);
-        pos8.setOn(false);
+        ruleArray[4].setPattern(tempVector);
+        ruleArray[4].setOn(false);
 
         tempVector = {1, 0, 1};
-        pos16.setPattern(tempVector);
-        pos16.setOn(false);
+        ruleArray[5].setPattern(tempVector);
+        ruleArray[5].setOn(false);
 
         tempVector = {1, 1, 0};
-        pos32.setPattern(tempVector);
-        pos32.setOn(false);
+        ruleArray[6].setPattern(tempVector);
+        ruleArray[6].setOn(false);
 
         tempVector = {1, 1, 1};
-        pos64.setPattern(tempVector);
-        pos64.setOn(false);
+        ruleArray[7].setPattern(tempVector);
+        ruleArray[7].setOn(false);
     }
 };
+
+/**
+ * ### FUNCTON DEFINITIONS ###
+ */
+
+/**
+ * @brief function to convert a number to 8-bit binary
+ * 
+ * @param n 
+ * @return string 
+ */
+string toBinary(int n);
+
+/**
+ * @brief Set the Rules From Binary Number
+ * 
+ * @param rules 
+ * @param binaryNumber 
+ * @return int 
+ */
+int setRulesFromBinary(RulesSet rules, string binaryNumber);
 
 #endif //CELLULAR_AUTOMATON_H

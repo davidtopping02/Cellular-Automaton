@@ -6,5 +6,6 @@ using namespace std;
 int main()
 {
 
-    return 0;
+    RulesSet theRules;
+    setRulesFromBinary(theRules, "00100000");
 }
