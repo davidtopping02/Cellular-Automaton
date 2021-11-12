@@ -1,8 +1,9 @@
-#include <iostream>
 #include "cellularAutomaton.h"
+#include <iostream>
 #include <bitset>
 #include <cstring>
 #include <bits/stdc++.h>
+
 using namespace std;
 
 /**
@@ -19,17 +20,17 @@ string toBinary(int n)
     //converting bitset to string
     string binaryNum_string = binaryNum.to_string();
 
+    //returning a string with the converted number
     return binaryNum_string;
 }
 
 /**
  * @brief Set the Rules From Binary Number
- * 
- * @param rules 
+ *  
  * @param binaryNumber 
  * @return int 
  */
-int setRulesFromBinary(RulesSet theRules, string binaryNumber)
+int RulesSet::setRulesFromBinary(string binaryNumber)
 {
     //converting the binary number to an array of characters in correct order
     char binArray[8];
@@ -41,9 +42,64 @@ int setRulesFromBinary(RulesSet theRules, string binaryNumber)
     {
         if (binArray[i] == '1')
         {
-            theRules.ruleArray[i].setOn(true);
+            this->ruleArray[i].setOn(true);
         }
     }
 
     return SUCCESS;
+}
+
+/**
+ * @brief determines the next line based on the rules and the previous line
+ * 
+ * @param theRules 
+ * @param currentLine 
+ * @return int* 
+ */
+int *nextLine(RulesSet theRules, int currentLine[])
+{
+    //initialising temporary variables
+    int previous = currentLine[41];
+    static int nextLine[41];
+
+    //initialising all array values to 0
+    for (int i = 0; i < 41; i++)
+    {
+        nextLine[i] = 0;
+    }
+
+    //looping through the whole row
+    for (int i = 0; i < 41; i++)
+    {
+        //initialise temporary variables
+        Rule ruleToUse;
+        int currentPattern[3];
+
+        //getting the pattern (previous, currnet, next) for the current position and storing
+        currentPattern[0] = previous;
+        currentPattern[1] = currentLine[i];
+        currentPattern[2] = currentLine[(i + 1)];
+
+        //looping through each rule finding which rule applies to the pattern found
+        for (int j = 8; j >= 0; j--)
+        {
+            if ((currentPattern[0] == theRules.ruleArray[j].pattern[0]) && (currentPattern[1] == theRules.ruleArray[j].pattern[1]) && (currentPattern[2] == theRules.ruleArray[j].pattern[2]))
+            {
+                ruleToUse = theRules.ruleArray[j];
+                break;
+            }
+        }
+
+        //setting new previous to the current
+        previous = currentLine[i];
+
+        //setting the nexlines value to be 1 if rule is on
+        if (ruleToUse.getOn() == true)
+        {
+            nextLine[i] = 1;
+        }
+    }
+
+    //returning a pointer to the next line
+    return nextLine;
 }
