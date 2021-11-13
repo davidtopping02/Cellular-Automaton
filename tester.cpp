@@ -11,30 +11,20 @@ int main()
 
     //creating new rule set and setting it to rule 30
     RulesSet theRules;
-    theRules.setRulesFromBinary("00011110");
+    theRules.setRulesFromBinary(toBinary(30));
 
     //creating a sample current line and initialising all values to 0
-    int lineArray[41];
+    int lineArray[81];
 
-    for (int i = 0; i < 41; i++)
+    for (int i = 0; i < 81; i++)
     {
         lineArray[i] = 0;
     }
 
     //setting middle array elemenet to 1
-    lineArray[21] = 1;
+    lineArray[41] = 1;
 
-    //getting a pointer to the next line after processing
-    int *newLine = nextLine(theRules, lineArray);
-
-    //printing the next line
-    for (int i = 0; i < 41; i++)
-    {
-        cout << newLine[i];
-    }
-
-    cout << endl
-         << "DONE" << endl;
+    newLine(theRules, lineArray, 40);
 
     return 0;
 }

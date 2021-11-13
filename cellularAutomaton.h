@@ -167,6 +167,13 @@ int setRulesFromBinary(string binaryNumber);
  * @param currentLine 
  * @return int* 
  */
-int *nextLine(RulesSet theRules, int currentLine[41]);
+void newLine(RulesSet theRules, int currentLine[41], int endCondition);
+
+/**
+ * @brief displays the array containing the next line
+ * 
+ * @param cellArray 
+ */
+void display(int cellArray[]);
 
 #endif //CELLULAR_AUTOMATON_H
