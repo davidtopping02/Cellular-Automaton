@@ -13,6 +13,11 @@ int main()
     RulesSet theRules;
     theRules.setRulesFromBinary(toBinary(30));
 
+    //emptying the file
+    std::ofstream ofs;
+    ofs.open("cellularAutomaton.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
+
     //creating a sample current line and initialising all values to 0
     int lineArray[81];
 

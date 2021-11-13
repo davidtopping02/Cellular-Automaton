@@ -3,6 +3,8 @@
 #include <bitset>
 #include <cstring>
 #include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -106,6 +108,7 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
         //  int *newLine = nextLine(theRules, lineArray);
 
         display(nextLine);
+        writeToFile(nextLine);
         newLine(theRules, nextLine, endCondition);
 
         //returning a pointer to the next line
@@ -132,4 +135,30 @@ void display(int cellArray[])
         }
     }
     cout << '\n';
+}
+
+/**
+ * @brief writes the output of the program to a file
+ *
+ * @param cellArray 
+*/
+
+void writeToFile(int cellArray[]) {
+
+    //open file
+    string filename("cellularAutomaton.txt");
+    fstream myFile;
+    myFile.open(filename, std::ios_base::app | std::ios_base::in);
+
+    //if file is open
+    if (myFile.is_open())
+        for (int i = 0; i < 81; i++) {
+        if (cellArray[i] == 1) {
+            myFile << "*";
+        }
+        else {
+            myFile << ".";
+        }
+    }
+    myFile << '\n';
 }
