@@ -12,9 +12,29 @@
 #ifndef CELLULAR_AUTOMATON_H
 #define CELLULAR_AUTOMATON_H
 
+/** 
+ * ### INCLUDES ###
+ */
+#include <iostream>
+#include <bitset>
+#include <cstring>
+#include <bits/stdc++.h>
+
+using namespace std;
+
 /**
- * CLASSES REQUIRED FOR THE CELLULAR AUTOMATON PROGRAM
- * 
+ * ### ERROR codes / SUCCESS codes ###
+ */
+#define SUCCESS 100
+#define INVALID_INPUT_PARAMETER 101
+#define PARTIAL_SUCCESS 102
+#define MEMORY_ALLOCATION_ERROR 103
+#define NOT_IMPLEMENTED 104
+#define FILE_IO_ERROR 105
+
+/**
+ *
+ * ### CLASSES REQUIRED FOR THE CELLULAR AUTOMATON PROGRAM ###
  */
 
 /**
@@ -24,10 +44,12 @@
 class Rule
 {
 private:
-    int pattern[3];
     bool on;
 
 public:
+    //pattern aray to hold the pattern of each rule
+    int pattern[3];
+
     /**
      * @brief Construct a new Rule object
      * 
@@ -36,24 +58,6 @@ public:
     {
         //initialising the private members
         this->on = false;
-
-        for (int i = 0; i < 3; i++)
-        {
-            this->pattern[i] = 0;
-        }
-    }
-
-    /**
-     * @brief Set the Pattern object
-     * 
-     * @param patternArray 
-     */
-    void setPattern(int patternArray[3])
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            pattern[i] = patternArray[i];
-        }
     }
 
     /**
@@ -63,7 +67,18 @@ public:
      */
     void setOn(bool onOrOff)
     {
-        on = onOrOff;
+        this->on = onOrOff;
+    }
+
+    /**
+     * @brief Get the On object
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool getOn()
+    {
+        return on;
     }
 };
 
@@ -74,29 +89,84 @@ public:
 class RulesSet
 {
 
-private:
-    //each rule position
-    Rule pos1;
-    Rule pos2;
-    Rule pos4;
-    Rule pos8;
-    Rule pos16;
-    Rule pos32;
-    Rule pos64;
-    Rule pos128;
-
 public:
+    //an array of rules for each binary position
+    Rule ruleArray[8];
+
+    int setRulesFromBinary(string binaryNumber);
+
     RulesSet()
     {
         //initialising all patterns
-        int patternArray[3] = {0, 0, 0};
-        pos1.setPattern(patternArray);
-        pos1.setOn(false);
+        ruleArray[0].pattern[0] = 0;
+        ruleArray[0].pattern[1] = 0;
+        ruleArray[0].pattern[2] = 0;
+        ruleArray[0].setOn(false);
 
-        int patternArray[3] = {0, 0, 1};
-        pos2.setPattern(patternArray);
-        pos2.setOn(false);
+        ruleArray[1].pattern[0] = 0;
+        ruleArray[1].pattern[1] = 0;
+        ruleArray[1].pattern[2] = 1;
+        ruleArray[1].setOn(false);
+
+        ruleArray[2].pattern[0] = 0;
+        ruleArray[2].pattern[1] = 1;
+        ruleArray[2].pattern[2] = 0;
+        ruleArray[2].setOn(false);
+
+        ruleArray[3].pattern[0] = 0;
+        ruleArray[3].pattern[1] = 1;
+        ruleArray[3].pattern[2] = 1;
+        ruleArray[3].setOn(false);
+
+        ruleArray[4].pattern[0] = 1;
+        ruleArray[4].pattern[1] = 0;
+        ruleArray[4].pattern[2] = 0;
+        ruleArray[4].setOn(false);
+
+        ruleArray[5].pattern[0] = 1;
+        ruleArray[5].pattern[1] = 0;
+        ruleArray[5].pattern[2] = 1;
+        ruleArray[5].setOn(false);
+
+        ruleArray[6].pattern[0] = 1;
+        ruleArray[6].pattern[1] = 1;
+        ruleArray[6].pattern[2] = 0;
+        ruleArray[6].setOn(false);
+
+        ruleArray[7].pattern[0] = 1;
+        ruleArray[7].pattern[1] = 1;
+        ruleArray[7].pattern[2] = 1;
+        ruleArray[7].setOn(false);
     }
 };
+
+/**
+ * ### FUNCTON DEFINITIONS ###
+ */
+
+/**
+ * @brief function to convert a number to 8-bit binary
+ * 
+ * @param n 
+ * @return string 
+ */
+string toBinary(int n);
+
+/**
+ * @brief Set the Rules From Binary Number
+ * 
+ * @param binaryNumber 
+ * @return int 
+ */
+int setRulesFromBinary(string binaryNumber);
+
+/**
+ * @brief determines the next line based on the rules and the previous line
+ * 
+ * @param theRules 
+ * @param currentLine 
+ * @return int* 
+ */
+int *nextLine(RulesSet theRules, int currentLine[41]);
 
 #endif //CELLULAR_AUTOMATON_H
