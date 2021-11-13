@@ -3,7 +3,6 @@
 #include <bitset>
 #include <cstring>
 #include <bits/stdc++.h>
-// #include "display.cpp"
 
 using namespace std;
 
@@ -26,24 +25,6 @@ int main()
     lineArray[21] = 1;
 
     newLine(theRules, lineArray, 40);
-    //getting a pointer to the next line after processing
-    // for (int i = 0; i <20; i++){
-    //     int *newLine = nextLine(theRules, lineArray);
-    //     display(newLine);
-    // }
-    
-
-    
-
-
-    //printing the next line
-    // for (int i = 0; i < 41; i++)
-    // {
-    //     cout << newLine[i];
-    // }
-
-    // cout << endl
-    //      << "DONE" << endl;
 
     return 0;
 }

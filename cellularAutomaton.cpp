@@ -3,7 +3,6 @@
 #include <bitset>
 #include <cstring>
 #include <bits/stdc++.h>
-#include "display.cpp"
 
 using namespace std;
 
@@ -51,7 +50,7 @@ int RulesSet::setRulesFromBinary(string binaryNumber)
 }
 
 /**
- * @brief determines the next line based on the rules and the previous line
+ * @brief recursive method that determines the next line based on the rules and the previous line
  * 
  * @param theRules 
  * @param currentLine 
@@ -59,58 +58,78 @@ int RulesSet::setRulesFromBinary(string binaryNumber)
  */
 void newLine(RulesSet theRules, int currentLine[], int endCondition)
 {
-    
 
     //initialising temporary variables
     int previous = currentLine[41];
     int nextLine[41];
-    if(endCondition > 0){
-    //initialising all array values to 0
-    for (int i = 0; i < 41; i++)
+    if (endCondition > 0)
     {
-        nextLine[i] = 0;
-    }
-
-    //looping through the whole row
-    for (int i = 0; i < 41; i++)
-    {
-        //initialise temporary variables
-        Rule ruleToUse;
-        int currentPattern[3];
-
-        //getting the pattern (previous, currnet, next) for the current position and storing
-        currentPattern[0] = previous;
-        currentPattern[1] = currentLine[i];
-        currentPattern[2] = currentLine[(i + 1)];
-
-        //looping through each rule finding which rule applies to the pattern found
-        for (int j = 8; j >= 0; j--)
+        //initialising all array values to 0
+        for (int i = 0; i < 41; i++)
         {
-            if ((currentPattern[0] == theRules.ruleArray[j].pattern[0]) && (currentPattern[1] == theRules.ruleArray[j].pattern[1]) && (currentPattern[2] == theRules.ruleArray[j].pattern[2]))
+            nextLine[i] = 0;
+        }
+
+        //looping through the whole row
+        for (int i = 0; i < 41; i++)
+        {
+            //initialise temporary variables
+            Rule ruleToUse;
+            int currentPattern[3];
+
+            //getting the pattern (previous, currnet, next) for the current position and storing
+            currentPattern[0] = previous;
+            currentPattern[1] = currentLine[i];
+            currentPattern[2] = currentLine[(i + 1)];
+
+            //looping through each rule finding which rule applies to the pattern found
+            for (int j = 8; j >= 0; j--)
             {
-                ruleToUse = theRules.ruleArray[j];
-                break;
+                if ((currentPattern[0] == theRules.ruleArray[j].pattern[0]) && (currentPattern[1] == theRules.ruleArray[j].pattern[1]) && (currentPattern[2] == theRules.ruleArray[j].pattern[2]))
+                {
+                    ruleToUse = theRules.ruleArray[j];
+                    break;
+                }
+            }
+
+            //setting new previous to the current
+            previous = currentLine[i];
+
+            //setting the nexlines value to be 1 if rule is on
+            if (ruleToUse.getOn() == true)
+            {
+                nextLine[i] = 1;
             }
         }
 
-
-        //setting new previous to the current
-        previous = currentLine[i];
-
-        //setting the nexlines value to be 1 if rule is on
-        if (ruleToUse.getOn() == true)
-        {
-            nextLine[i] = 1;
-        }
-    }
-
         endCondition--;
-    //  int *newLine = nextLine(theRules, lineArray);
+        //  int *newLine = nextLine(theRules, lineArray);
 
         display(nextLine);
         newLine(theRules, nextLine, endCondition);
 
-    //returning a pointer to the next line
-    // return nextLine;
+        //returning a pointer to the next line
+        // return nextLine;
     }
+}
+
+/**
+ * @brief displays the array containing the next line
+ * 
+ * @param cellArray 
+ */
+void display(int cellArray[])
+{
+    for (int i = 0; i < 41; i++)
+    {
+        if (cellArray[i] == 1)
+        {
+            cout << "#";
+        }
+        else
+        {
+            cout << "-";
+        }
+    }
+    cout << '\n';
 }
