@@ -3,6 +3,7 @@
 #include <bitset>
 #include <cstring>
 #include <bits/stdc++.h>
+#include "display.cpp"
 
 using namespace std;
 
@@ -56,12 +57,14 @@ int RulesSet::setRulesFromBinary(string binaryNumber)
  * @param currentLine 
  * @return int* 
  */
-int *nextLine(RulesSet theRules, int currentLine[])
+void newLine(RulesSet theRules, int currentLine[], int endCondition)
 {
+    
+
     //initialising temporary variables
     int previous = currentLine[41];
-    static int nextLine[41];
-
+    int nextLine[41];
+    if(endCondition > 0){
     //initialising all array values to 0
     for (int i = 0; i < 41; i++)
     {
@@ -90,6 +93,7 @@ int *nextLine(RulesSet theRules, int currentLine[])
             }
         }
 
+
         //setting new previous to the current
         previous = currentLine[i];
 
@@ -100,6 +104,13 @@ int *nextLine(RulesSet theRules, int currentLine[])
         }
     }
 
+        endCondition--;
+    //  int *newLine = nextLine(theRules, lineArray);
+
+        display(nextLine);
+        newLine(theRules, nextLine, endCondition);
+
     //returning a pointer to the next line
-    return nextLine;
+    // return nextLine;
+    }
 }

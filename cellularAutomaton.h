@@ -140,6 +140,18 @@ public:
     }
 };
 
+// void display(int cellArray[]){
+//     for(int i = 0; i < 10; i++){
+//         if(cellArray[i] == 1){
+//             cout << "#";
+//         }else{
+//             cout << "-";
+//         }
+//     }
+//     cout << '\n';
+// }
+
+
 /**
  * ### FUNCTON DEFINITIONS ###
  */
@@ -167,6 +179,14 @@ int setRulesFromBinary(string binaryNumber);
  * @param currentLine 
  * @return int* 
  */
-int *nextLine(RulesSet theRules, int currentLine[41]);
+void newLine(RulesSet theRules, int currentLine[41], int endCondition);
+
+/**
+ * @brief takes an array and uses it to display the next line
+ * 
+ * @param cellArray[]
+ * 
+ */
+// void display(int cellArray[]);
 
 #endif //CELLULAR_AUTOMATON_H
