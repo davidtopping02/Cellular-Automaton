@@ -183,4 +183,19 @@ void display(int cellArray[]);
  */
 void writeToFile(int cellArray[]);
 
+/**
+ * @brief run automaton with user input
+ */
+void automatonOptions();
+
+/**
+ * @brief run sample automaton
+ */
+void sampleAutomaton();
+
+/**
+ * @brief empties the file so that next one can be written
+ */
+void emptyFile();
+
 #endif //CELLULAR_AUTOMATON_H

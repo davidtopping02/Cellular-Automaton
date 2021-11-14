@@ -3,30 +3,25 @@
 using namespace std;
 #include <string>
 
-void automatonOptions();
-
 int main()
 {
     int choice = 0;
 
     while (choice != 4) {
-        cout << "\nSelect an option: [1] Run Automaton [2] Load saved file [3] Game of life [4] Exit" << endl;
+        cout << "\nSelect an option: [1] Run sample Automaton [2] Automaton using user inputs [3] 2D Cellular Automata [4] Exit" << endl;
         cin >> choice;
 
         switch (choice) {
             case 1:
-                automatonOptions();
+                sampleAutomaton();
                 break;
             case 2:
-                cout << "Choice 2" << endl;
+                automatonOptions();
                 break;
             case 3:
-                cout << "Choice 3" << endl;
+                cout << "Run 2D simulation" << endl;
                 break;
             case 4:
-                cout << "Choice 4" << endl;
-                break;
-            case 5:
                 cout << "Exiting Program" << endl;
                 break;
             default:
@@ -38,20 +33,72 @@ int main()
     return 0;
 }
 
-// MAY NEED TO DELETE THIS FUNCTION... IDK IF YOU GOT THESE VALUES IN THE ACTUAL FUNCTION
+void sampleAutomaton() {
+    emptyFile();
+    //creating new rule set and setting it to rule 30
+    RulesSet theRules;
+    theRules.setRulesFromBinary(toBinary(30));
+
+    //creating a sample current line and initialising all values to 0
+    int lineArray[81];
+
+    for (int i = 0; i < 81; i++)
+    {
+        lineArray[i] = 0;
+    }
+
+    //setting middle array elemenet to 1
+    lineArray[41] = 1;
+
+    newLine(theRules, lineArray, 40);
+}
+
 void automatonOptions() {
-    int rule1;
-    int iterations = 0;
-    string binary = "00000000";
+    //creating new rule set and setting it to users choice of rule
+    RulesSet theRules;
+    int rule;
+    int width;
+    int iterations;
+    emptyFile();
 
-    cout <<"\nEnter 8 bit binary number";
-    cin >> binary;
+    cout << "\nEnter number for which rule you would like to use" << endl;
+    cin >> rule;
+    theRules.setRulesFromBinary(toBinary(rule));
 
-    cout << "\nSelect Rule" << endl;
-    cin >> rule1;
+    //creating a current line and initialising all values to 0
+    /*
+    cout << "\nHow wide would you like to make it?" << endl;
+    cin >> width;
+    int lineArray[width];
 
-    cout << "\nHow long should it run for (how many iterations)" << endl;
+    for (int i = 0; i < width; i++)
+    {
+        lineArray[i] = 0;
+    }
+
+    //setting middle array element to 1
+    lineArray[width/2] = 1;
+    */
+
+    int lineArray[81];
+
+    for (int i = 0; i < 81; i++)
+    {
+        lineArray[i] = 0;
+    }
+
+    //setting middle array elemenet to 1
+    lineArray[41] = 1;
+
+    cout << "\nHow many lines should it run for?" << endl;
     cin >> iterations;
 
-    //call automaton function with these parameters?
+    newLine(theRules, lineArray, iterations);
+}
+
+void emptyFile() {
+    //emptying the file
+    std::ofstream ofs;
+    ofs.open("cellularAutomaton.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
 }

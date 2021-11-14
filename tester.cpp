@@ -8,7 +8,6 @@ using namespace std;
 
 int main()
 {
-
     //creating new rule set and setting it to rule 30
     RulesSet theRules;
     theRules.setRulesFromBinary(toBinary(30));
