@@ -3,6 +3,8 @@
 #include <bitset>
 #include <cstring>
 #include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -60,18 +62,18 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
 {
 
     //initialising temporary variables
-    int previous = currentLine[41];
-    int nextLine[41];
+    int previous = currentLine[81];
+    int nextLine[81];
     if (endCondition > 0)
     {
         //initialising all array values to 0
-        for (int i = 0; i < 41; i++)
+        for (int i = 0; i < 81; i++)
         {
             nextLine[i] = 0;
         }
 
         //looping through the whole row
-        for (int i = 0; i < 41; i++)
+        for (int i = 0; i < 81; i++)
         {
             //initialise temporary variables
             Rule ruleToUse;
@@ -106,6 +108,7 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
         //  int *newLine = nextLine(theRules, lineArray);
 
         display(nextLine);
+        writeToFile(nextLine);
         newLine(theRules, nextLine, endCondition);
 
         //returning a pointer to the next line
@@ -120,16 +123,42 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
  */
 void display(int cellArray[])
 {
-    for (int i = 0; i < 41; i++)
+    for (int i = 0; i < 81; i++)
     {
         if (cellArray[i] == 1)
         {
-            cout << "#";
+            cout << "*";
         }
         else
         {
-            cout << "-";
+            cout << ".";
         }
     }
     cout << '\n';
+}
+
+/**
+ * @brief writes the output of the program to a file
+ *
+ * @param cellArray 
+*/
+
+void writeToFile(int cellArray[]) {
+
+    //open file
+    string filename("cellularAutomaton.txt");
+    fstream myFile;
+    myFile.open(filename, std::ios_base::app | std::ios_base::in);
+
+    //if file is open
+    if (myFile.is_open())
+        for (int i = 0; i < 81; i++) {
+        if (cellArray[i] == 1) {
+            myFile << "*";
+        }
+        else {
+            myFile << ".";
+        }
+    }
+    myFile << '\n';
 }

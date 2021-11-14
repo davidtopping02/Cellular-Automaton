@@ -176,4 +176,11 @@ void newLine(RulesSet theRules, int currentLine[41], int endCondition);
  */
 void display(int cellArray[]);
 
+/**
+ * @brief writes the array to the file
+ * 
+ * @param cellArray 
+ */
+void writeToFile(int cellArray[]);
+
 #endif //CELLULAR_AUTOMATON_H
