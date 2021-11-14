@@ -1,13 +1,13 @@
 /**
  * @file cellularAutomaton.h
  * @author your name (you@domain.com)
- * @brief 
+ * @brief Holds all the data structures for the functioning of the program
  * @version 0.1
  * @date 2021-11-11
  * 
  * @copyright Copyright (c) 2021
  * 
- */
+ **/
 
 #ifndef CELLULAR_AUTOMATON_H
 #define CELLULAR_AUTOMATON_H
@@ -23,7 +23,7 @@
 using namespace std;
 
 /**
- * ### ERROR codes / SUCCESS codes ###
+ * ### ERROR codes / SUCCESS codes / Global Variables ###
  */
 #define SUCCESS 100
 #define INVALID_INPUT_PARAMETER 101
@@ -188,14 +188,22 @@ void writeToFile(int cellArray[]);
  *
  * @param theRules
  */
-void runAutomaton(RulesSet theRules);
+void runAutomatonUserInput(RulesSet theRules);
 
 /**
  * @brief wrapper function that runs the cellular automaton by calling the recursive method
  * 
  * @param theRules 
  * @param iterations 
+ * @param startingPoint
  */
-void cellularAutomaton(RulesSet theRules, int iterations);
+void cellularAutomaton(RulesSet theRules, int iterations, int startingPoint);
+
+/**
+ * @brief runs the cellular automaton on a random rule for 40 generations
+ * 
+ * @param theRules 
+ */
+void randomAutomaton(RulesSet theRules);
 
 #endif //CELLULAR_AUTOMATON_H
