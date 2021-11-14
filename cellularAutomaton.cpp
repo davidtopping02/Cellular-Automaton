@@ -105,15 +105,37 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
         }
 
         endCondition--;
-        //  int *newLine = nextLine(theRules, lineArray);
 
         display(nextLine);
         writeToFile(nextLine);
         newLine(theRules, nextLine, endCondition);
-
-        //returning a pointer to the next line
-        // return nextLine;
     }
+}
+
+/**
+ * @brief wrapper function that runs the cellular automaton by calling the recursive method
+ * 
+ * @param theRules 
+ * @param iterations 
+ */
+void cellularAutomaton(RulesSet theRules, int iterations)
+{
+    //creating a sample current line and initialising all values to 0
+    int firstLine[81];
+
+    for (int i = 0; i < 81; i++)
+    {
+        firstLine[i] = 0;
+    }
+
+    firstLine[41] = 1;
+
+    //displaying/writing to file the first line
+    writeToFile(firstLine);
+    display(firstLine);
+
+    //calling recursive cellular automaton funciton
+    newLine(theRules, firstLine, iterations);
 }
 
 /**
@@ -142,23 +164,26 @@ void display(int cellArray[])
  *
  * @param cellArray 
 */
-
-void writeToFile(int cellArray[]) {
-
+void writeToFile(int cellArray[])
+{
     //open file
     string filename("cellularAutomaton.txt");
     fstream myFile;
-    myFile.open(filename, std::ios_base::app | std::ios_base::in);
+    myFile.open(filename, ios_base::app | ios_base::in);
 
     //if file is open
     if (myFile.is_open())
-        for (int i = 0; i < 81; i++) {
-        if (cellArray[i] == 1) {
-            myFile << "*";
+        for (int i = 0; i < 81; i++)
+        {
+            if (cellArray[i] == 1)
+            {
+                myFile << "*";
+            }
+            else
+            {
+                myFile << ".";
+            }
         }
-        else {
-            myFile << ".";
-        }
-    }
     myFile << '\n';
+    myFile.close();
 }

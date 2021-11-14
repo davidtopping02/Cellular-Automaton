@@ -3,55 +3,83 @@
 using namespace std;
 #include <string>
 
-void automatonOptions();
-
 int main()
 {
-    int choice = 0;
+    //initialise local variables/objects
+    RulesSet theRules;
+    int choice;
 
-    while (choice != 4) {
-        cout << "\nSelect an option: [1] Run Automaton [2] Load saved file [3] Game of life [4] Exit" << endl;
+    //looping till exit
+    while (choice != 4)
+    {
+        //menu option
+        cout << "1. Run Automaton (chosing your own rule)" << endl;
+        cout << "2. Load saved file" << endl;
+        cout << "3. Game of life " << endl;
+        cout << "4. Exit " << endl;
+        cout << "Option: ";
+
         cin >> choice;
 
-        switch (choice) {
-            case 1:
-                automatonOptions();
-                break;
-            case 2:
-                cout << "Choice 2" << endl;
-                break;
-            case 3:
-                cout << "Choice 3" << endl;
-                break;
-            case 4:
-                cout << "Choice 4" << endl;
-                break;
-            case 5:
-                cout << "Exiting Program" << endl;
-                break;
-            default:
-                cout << "Invalid input" << endl;
+        switch (choice)
+        {
+        case 1:
+            runAutomaton(theRules);
+            break;
+        case 2:
+            cout << "Choice 2" << endl;
+            break;
+        case 3:
+            cout << "Choice 3" << endl;
+            break;
+        case 4:
+            cout << "Choice 4" << endl;
+            break;
+        case 5:
+            cout << "Exiting Program" << endl;
+            break;
+        default:
+            cout << "Invalid input\n"
+                 << endl;
         }
         cin.clear();
-        cin.ignore();
+        cin.ignore(10000, '\n');
     }
     return 0;
 }
 
-// MAY NEED TO DELETE THIS FUNCTION... IDK IF YOU GOT THESE VALUES IN THE ACTUAL FUNCTION
-void automatonOptions() {
-    int rule1;
+/**
+ * @brief runs the cellular automaton with user options
+ *
+ * @param theRules
+ */
+void runAutomaton(RulesSet theRules)
+{
+    //initialise local variables/objects
+    int userRule;
     int iterations = 0;
-    string binary = "00000000";
 
-    cout <<"\nEnter 8 bit binary number";
-    cin >> binary;
+    //getting user's rule
 
-    cout << "\nSelect Rule" << endl;
-    cin >> rule1;
+    while (userRule < 0 || userRule > 255)
+    {
 
-    cout << "\nHow long should it run for (how many iterations)" << endl;
-    cin >> iterations;
+        cout << "\nSelect Rule (0-255)" << endl;
+        cout << "Rule: ";
+        cin >> userRule;
 
-    //call automaton function with these parameters?
+        if (!userRule)
+        {
+            cout << "\nERROR- invalid input\n"
+                 << endl;
+        }
+        else
+        {
+            // //setting the rules to the user's option
+            theRules.setRulesFromBinary(toBinary(userRule));
+
+            //running the automaton
+            cellularAutomaton(theRules, 40);
+        }
+    }
 }

@@ -183,4 +183,19 @@ void display(int cellArray[]);
  */
 void writeToFile(int cellArray[]);
 
+/**
+ * @brief runs the cellular automaton with user options
+ *
+ * @param theRules
+ */
+void runAutomaton(RulesSet theRules);
+
+/**
+ * @brief wrapper function that runs the cellular automaton by calling the recursive method
+ * 
+ * @param theRules 
+ * @param iterations 
+ */
+void cellularAutomaton(RulesSet theRules, int iterations);
+
 #endif //CELLULAR_AUTOMATON_H
