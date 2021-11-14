@@ -1,3 +1,15 @@
+/**
+ * @file cellularAutomaton.cpp
+ * @author David Topping, Caleb Harmon, Heather Currie
+ * @brief All functionallity of the cellular automaton is held within this file
+ * @version 0.1
+ * @date 2021-11-14
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ **/
+
+//includes required for this file
 #include "cellularAutomaton.h"
 #include <iostream>
 #include <bitset>
@@ -117,8 +129,9 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
  * 
  * @param theRules 
  * @param iterations 
+ * @param startingPoint
  */
-void cellularAutomaton(RulesSet theRules, int iterations)
+void cellularAutomaton(RulesSet theRules, int iterations, int startingPoint)
 {
     //creating a sample current line and initialising all values to 0
     int firstLine[81];
@@ -128,14 +141,14 @@ void cellularAutomaton(RulesSet theRules, int iterations)
         firstLine[i] = 0;
     }
 
-    firstLine[41] = 1;
+    firstLine[startingPoint] = 1;
 
     //displaying/writing to file the first line
     writeToFile(firstLine);
     display(firstLine);
 
     //calling recursive cellular automaton funciton
-    newLine(theRules, firstLine, iterations);
+    newLine(theRules, firstLine, (iterations - 1));
 }
 
 /**
