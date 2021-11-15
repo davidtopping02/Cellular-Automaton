@@ -176,7 +176,7 @@ void runAutomatonUserInput(RulesSet theRules)
         //running the automaton
         cellularAutomaton(theRules, iterations, firstLine, cellWidth);
 
-        cout << "Press return for main menu"
+        cout << "Press return for main menu" << endl;
     }
 }
 
