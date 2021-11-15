@@ -25,7 +25,7 @@ int main()
     RulesSet theRules;
     int choice;
     string file;
-    
+
     //looping till exit
     while (choice != 4)
     {
@@ -85,7 +85,7 @@ void runAutomatonUserInput(RulesSet theRules)
     emptyFile();
 
     //getting user's rule and number of iterations
-    while ((userRule < 0 || userRule > 255) && iterations > 1 && startingPoint < 0 || startingPoint > 81)
+    while ((userRule < 0 || userRule > 255) && (iterations > 1) && (startingPoint < 0 || startingPoint > 81))
     {
         //rule
         cout << "\nSelect Rule (0-255)" << endl;
@@ -158,7 +158,8 @@ void randomAutomaton(RulesSet theRules)
 /**
  * @brief empties the file
  */
-void emptyFile() {
+void emptyFile()
+{
     std::ofstream ofs;
     ofs.open("cellularAutomaton.txt", std::ofstream::out | std::ofstream::trunc);
     ofs.close();
