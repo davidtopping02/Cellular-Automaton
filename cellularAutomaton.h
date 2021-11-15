@@ -195,9 +195,9 @@ void runAutomatonUserInput(RulesSet theRules);
  * 
  * @param theRules 
  * @param iterations 
- * @param startingPoint
+ * @param firstLine 
  */
-void cellularAutomaton(RulesSet theRules, int iterations, int startingPoint);
+void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[]);
 
 /**
  * @brief runs the cellular automaton on a random rule for 40 generations
