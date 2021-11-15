@@ -206,4 +206,9 @@ void cellularAutomaton(RulesSet theRules, int iterations, int startingPoint);
  */
 void randomAutomaton(RulesSet theRules);
 
+/**
+ * @brief empties the file
+ */
+void emptyFile();
+
 #endif //CELLULAR_AUTOMATON_H
