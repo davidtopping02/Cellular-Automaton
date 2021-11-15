@@ -24,6 +24,7 @@ int main()
     //initialise local variables/objects
     RulesSet theRules;
     int choice;
+    string file;
     
     //looping till exit
     while (choice != 4)
@@ -49,7 +50,9 @@ int main()
             cout << "" << endl;
             break;
         case 3:
-            cout << "Choice 3" << endl;
+            cout << "Enter file name to read in: (recommend cellularAutomaton.txt) ";
+            cin >> file;
+            readFile(file);
             cout << "" << endl;
             break;
         case 4:

@@ -211,4 +211,11 @@ void randomAutomaton(RulesSet theRules);
  */
 void emptyFile();
 
+/**
+ * @brief empties the file
+ * 
+ * @param file, is the file to be read
+ */
+void readFile(string file);
+
 #endif //CELLULAR_AUTOMATON_H
