@@ -129,20 +129,10 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
  * 
  * @param theRules 
  * @param iterations 
- * @param startingPoint
+ * @param firstLine 
  */
-void cellularAutomaton(RulesSet theRules, int iterations, int startingPoint)
+void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[])
 {
-    //creating a sample current line and initialising all values to 0
-    int firstLine[81];
-
-    for (int i = 0; i < 81; i++)
-    {
-        firstLine[i] = 0;
-    }
-
-    firstLine[startingPoint] = 1;
-
     //displaying/writing to file the first line
     writeToFile(firstLine);
     display(firstLine);
@@ -201,7 +191,8 @@ void writeToFile(int cellArray[])
     myFile.close();
 }
 
-void readFile(string file) {
+void readFile(string file)
+{
     // Create a text string, which is used to output the text file
     string myText;
 
@@ -209,7 +200,8 @@ void readFile(string file) {
     ifstream MyReadFile(file);
 
     // Use a while loop together with the getline() function to read the file line by line
-    while (getline (MyReadFile, myText)) {
+    while (getline(MyReadFile, myText))
+    {
         // Output the text from the file
         cout << myText << endl;
     }
