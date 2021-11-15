@@ -24,7 +24,8 @@ int main()
     //initialise local variables/objects
     RulesSet theRules;
     int choice;
-
+    string file;
+    
     //looping till exit
     while (choice != 4)
     {
@@ -49,7 +50,9 @@ int main()
             cout << "" << endl;
             break;
         case 3:
-            cout << "Choice 3" << endl;
+            cout << "Enter file name to read in: (recommend cellularAutomaton.txt) ";
+            cin >> file;
+            readFile(file);
             cout << "" << endl;
             break;
         case 4:
@@ -79,6 +82,7 @@ void runAutomatonUserInput(RulesSet theRules)
     int userRule;
     int iterations;
     int startingPoint;
+    emptyFile();
 
     //getting user's rule and number of iterations
     while ((userRule < 0 || userRule > 255) && iterations > 1 && startingPoint < 0 || startingPoint > 81)
@@ -136,6 +140,7 @@ void runAutomatonUserInput(RulesSet theRules)
  */
 void randomAutomaton(RulesSet theRules)
 {
+    emptyFile();
     srand(time(0));
     int randomNum = ((rand() % 255) + 1);
 
@@ -148,4 +153,13 @@ void randomAutomaton(RulesSet theRules)
 
     //running the automaton
     cellularAutomaton(theRules, 40, 41);
+}
+
+/**
+ * @brief empties the file
+ */
+void emptyFile() {
+    std::ofstream ofs;
+    ofs.open("cellularAutomaton.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
 }

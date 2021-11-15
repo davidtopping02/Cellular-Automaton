@@ -206,4 +206,16 @@ void cellularAutomaton(RulesSet theRules, int iterations, int startingPoint);
  */
 void randomAutomaton(RulesSet theRules);
 
+/**
+ * @brief empties the file
+ */
+void emptyFile();
+
+/**
+ * @brief empties the file
+ * 
+ * @param file, is the file to be read
+ */
+void readFile(string file);
+
 #endif //CELLULAR_AUTOMATON_H
