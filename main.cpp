@@ -140,20 +140,23 @@ void runAutomatonUserInput(RulesSet theRules)
         while (startingPoint != -1)
         {
 
-            cout << "\nEnter the positions you would like to turn on (between 0 and "<< cellWidth << " - " <<cellWidth/2 << " is the middle)" << endl;
+            cout << "\nEnter the positions you would like to turn on (between 0 and " << cellWidth << " - " << cellWidth / 2 << " is the middle)" << endl;
             cout << "Enter '-1' to run automaton\n"
                  << endl;
             cout << "Position: ";
             cin >> startingPoint;
 
-            if (startingPoint < 1 || startingPoint > cellWidth)
+            if (startingPoint < -1 || startingPoint > cellWidth)
             {
                 cout << "\nEnter a valid number\n"
                      << endl;
             }
             else
             {
-                firstLine[startingPoint] = 1;
+                if (startingPoint != -1)
+                {
+                    firstLine[startingPoint] = 1;
+                }
 
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
