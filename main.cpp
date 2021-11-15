@@ -140,7 +140,7 @@ void randomAutomaton(RulesSet theRules)
     int randomNum = ((rand() % 255) + 1);
 
     cout
-        << "Running rule '" << randomNum << "'\n"
+        << "\nRunning rule '" << randomNum << "'\n"
         << endl;
 
     //setting the rules to the user's option
