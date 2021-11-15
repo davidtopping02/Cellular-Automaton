@@ -70,22 +70,22 @@ int RulesSet::setRulesFromBinary(string binaryNumber)
  * @param currentLine 
  * @return int* 
  */
-void newLine(RulesSet theRules, int currentLine[], int endCondition)
+void newLine(RulesSet theRules, int currentLine[], int endCondition, int width)
 {
 
     //initialising temporary variables
-    int previous = currentLine[81];
-    int nextLine[81];
+    int previous = currentLine[width];
+    int nextLine[width];
     if (endCondition > 0)
     {
         //initialising all array values to 0
-        for (int i = 0; i < 81; i++)
+        for (int i = 0; i < width; i++)
         {
             nextLine[i] = 0;
         }
 
         //looping through the whole row
-        for (int i = 0; i < 81; i++)
+        for (int i = 0; i < width; i++)
         {
             //initialise temporary variables
             Rule ruleToUse;
@@ -118,9 +118,9 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
 
         endCondition--;
 
-        display(nextLine);
-        writeToFile(nextLine);
-        newLine(theRules, nextLine, endCondition);
+        display(nextLine, width);
+        writeToFile(nextLine, width);
+        newLine(theRules, nextLine, endCondition, width);
     }
 }
 
@@ -131,14 +131,14 @@ void newLine(RulesSet theRules, int currentLine[], int endCondition)
  * @param iterations 
  * @param firstLine 
  */
-void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[])
+void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[], int width)
 {
     //displaying/writing to file the first line
-    writeToFile(firstLine);
-    display(firstLine);
+    writeToFile(firstLine, width);
+    display(firstLine, width);
 
     //calling recursive cellular automaton funciton
-    newLine(theRules, firstLine, (iterations - 1));
+    newLine(theRules, firstLine, (iterations - 1), width);
 }
 
 /**
@@ -146,9 +146,9 @@ void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[])
  * 
  * @param cellArray 
  */
-void display(int cellArray[])
+void display(int cellArray[], int width)
 {
-    for (int i = 0; i < 81; i++)
+    for (int i = 0; i < width; i++)
     {
         if (cellArray[i] == 1)
         {
@@ -167,7 +167,7 @@ void display(int cellArray[])
  *
  * @param cellArray 
 */
-void writeToFile(int cellArray[])
+void writeToFile(int cellArray[], int width)
 {
     //open file
     string filename("cellularAutomaton.txt");
@@ -176,7 +176,7 @@ void writeToFile(int cellArray[])
 
     //if file is open
     if (myFile.is_open())
-        for (int i = 0; i < 81; i++)
+        for (int i = 0; i < width; i++)
         {
             if (cellArray[i] == 1)
             {

@@ -167,21 +167,22 @@ int setRulesFromBinary(string binaryNumber);
  * @param currentLine 
  * @return int* 
  */
-void newLine(RulesSet theRules, int currentLine[41], int endCondition);
+void newLine(RulesSet theRules, int currentLine[41], int endCondition, int width);
 
 /**
  * @brief displays the array containing the next line
  * 
  * @param cellArray 
  */
-void display(int cellArray[]);
+void display(int cellArray[], int width);
 
 /**
  * @brief writes the array to the file
  * 
  * @param cellArray 
+ * @param width
  */
-void writeToFile(int cellArray[]);
+void writeToFile(int cellArray[], int width);
 
 /**
  * @brief runs the cellular automaton with user options
@@ -196,8 +197,9 @@ void runAutomatonUserInput(RulesSet theRules);
  * @param theRules 
  * @param iterations 
  * @param firstLine 
+ * @param width 
  */
-void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[]);
+void cellularAutomaton(RulesSet theRules, int iterations, int firstLine[], int width);
 
 /**
  * @brief runs the cellular automaton on a random rule for 40 generations

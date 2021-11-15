@@ -30,7 +30,7 @@ int main()
     while (choice != 4)
     {
         //menu option
-        cout << "1. Run Cellular Automaton (chosing your own rule, number of generations and starting point)" << endl;
+        cout << "1. Run Cellular Automaton (chosing your own rule, number of generations, automaton width and starting point)" << endl;
         cout << "2. Run random Cellular Automaton rule for 40 generations" << endl;
         cout << "3. Load from File" << endl;
         cout << "4. Exit " << endl;
@@ -81,11 +81,12 @@ void runAutomatonUserInput(RulesSet theRules)
     //initialise local variables/objects
     int userRule = -1;
     int iterations = -1;
+    int cellWidth = -1;
     int startingPoint = -2;
     emptyFile();
 
     //getting user's rule and number of iterations
-    while ((userRule < 0 || userRule > 255) && (iterations < 1) && (startingPoint < 0 || startingPoint > 81))
+    while ((userRule < 0 || userRule > 255) && (iterations < 1) && (startingPoint < 0 || startingPoint > 81) && (cellWidth < 1 || cellWidth > 200))
     {
         //rule
         cout << "\nSelect Rule (0-255)" << endl;
@@ -113,12 +114,25 @@ void runAutomatonUserInput(RulesSet theRules)
             break;
         }
 
+        //setting the width
+        cout << "\nSet the width of the automaton (1-200)" << endl;
+        cout << "Width: ";
+        cin >> cellWidth;
+
+        if (!cin || cellWidth < 1 || cellWidth > 200)
+        {
+            cout << "Bad value! Press enter to continue\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+        }
+
         //starting point(s)
 
         //creating a sample current line and initialising all values to 0
-        int firstLine[81];
+        int firstLine[cellWidth];
 
-        for (int i = 0; i < 81; i++)
+        for (int i = 0; i < cellWidth; i++)
         {
             firstLine[i] = 0;
         }
@@ -126,13 +140,13 @@ void runAutomatonUserInput(RulesSet theRules)
         while (startingPoint != -1)
         {
 
-            cout << "\nEnter the positions you would like to turn on (between 0 and 81 - 41 is the middle)" << endl;
+            cout << "\nEnter the positions you would like to turn on (between 0 and "<< cellWidth << " - " <<cellWidth/2 << " is the middle)" << endl;
             cout << "Enter '-1' to run automaton\n"
                  << endl;
             cout << "Position: ";
             cin >> startingPoint;
 
-            if (startingPoint < 1 || startingPoint > 81)
+            if (startingPoint < 1 || startingPoint > cellWidth)
             {
                 cout << "\nEnter a valid number\n"
                      << endl;
@@ -158,7 +172,7 @@ void runAutomatonUserInput(RulesSet theRules)
         theRules.setRulesFromBinary(toBinary(userRule));
 
         //running the automaton
-        cellularAutomaton(theRules, iterations, firstLine);
+        cellularAutomaton(theRules, iterations, firstLine, cellWidth);
     }
 }
 
@@ -192,7 +206,7 @@ void randomAutomaton(RulesSet theRules)
     theRules.setRulesFromBinary(toBinary(randomNum));
 
     //running the automaton
-    cellularAutomaton(theRules, 40, firstLine);
+    cellularAutomaton(theRules, 40, firstLine, 81);
 }
 
 /**
