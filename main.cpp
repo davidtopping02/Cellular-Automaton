@@ -115,19 +115,17 @@ void runAutomatonUserInput(RulesSet theRules)
         }
 
         //setting the width
-        cout << "\nSet the width of the automaton (1-200)" << endl;
+        cout << "\nSet the width of the automaton (1-170)" << endl;
         cout << "Width: ";
         cin >> cellWidth;
 
-        if (!cin || cellWidth < 1 || cellWidth > 200)
+        if (!cin || cellWidth < 1 || cellWidth > 170)
         {
             cout << "Bad value! Press enter to continue\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
         }
-
-        //starting point(s)
 
         //creating a sample current line and initialising all values to 0
         int firstLine[cellWidth];
@@ -165,7 +163,8 @@ void runAutomatonUserInput(RulesSet theRules)
 
         if (!cin)
         {
-            cout << "Bad value! Press enter to continue\n";
+            cout << "Bad value! Press enter to continue\n"
+                 << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
@@ -176,6 +175,8 @@ void runAutomatonUserInput(RulesSet theRules)
 
         //running the automaton
         cellularAutomaton(theRules, iterations, firstLine, cellWidth);
+
+        cout << "Press return for main menu"
     }
 }
 
